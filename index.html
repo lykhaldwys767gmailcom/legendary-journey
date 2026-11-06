@@ -1,38 +1,115 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>برجر الملك | Burger King</title>
+<title>برجر الملك | المنيو</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#FFF8F0;color:#2d2d2d}
-header{background:#FF6B00;color:white;padding:18px;text-align:center;position:sticky;top:0}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,sans-serif}
+body{background:#FFF8F0;color:#222}
+header{background:#FF6B00;color:#fff;text-align:center;padding:28px 15px;position:sticky;top:0;z-index:10}
 header h1{font-size:32px}
-header p{margin-top:5px}
-.hero{background:#FFC500;text-align:center;padding:40px 20px}
-.hero h2{font-size:38px;color:#4A1E00}
-.hero p{font-size:18px;margin:15px 0}
-.hero a{background:#D62300;color:white;padding:14px 30px;border-radius:30px;text-decoration:none;font-weight:bold;display:inline-block}
-.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;padding:25px;max-width:1000px;margin:auto}
-.card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.1);text-align:center;padding-bottom:20px}
+header p{opacity:.9;margin-top:5px}
+.offer{background:#FFD500;text-align:center;padding:18px}
+.offer h2{font-size:24px}
+.offer button{background:#D32F2F;color:#fff;border:none;padding:10px 22px;border-radius:25px;font-size:16px;margin-top:10px;cursor:pointer}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:15px;background:#fff;position:sticky;top:96px;z-index:9;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.tabs button{border:1px solid #FF6B00;background:#fff;color:#FF6B00;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:bold}
+.tabs button.active{background:#FF6B00;color:#fff}
+.container{max-width:1100px;margin:auto;padding:15px}
+.section-title{font-size:22px;margin:22px 0 12px;border-right:5px solid #FF6B00;padding-right:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.08)}
 .card img{width:100%;height:180px;object-fit:cover}
-.card h3{margin:15px 0 5px;font-size:22px}
-.card p{color:#777;padding:0 15px}
-.price{font-size:22px;font-weight:bold;color:#D62300;margin:10px 0}
-.card button{background:#FF6B00;color:white;border:none;padding:12px 25px;border-radius:25px;font-size:16px;cursor:pointer}
-footer{background:#2d2d2d;color:white;text-align:center;padding:20px;margin-top:20px}
+.card-body{padding:14px}
+.card-body h3{font-size:18px}
+.card-body p{color:#777;font-size:13px;margin:6px 0}
+.price-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.price{color:#D32F2F;font-weight:bold;font-size:18px}
+.price span{color:#999;text-decoration:line-through;font-size:13px;margin-right:5px}
+.add{background:#FF6B00;color:#fff;border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:bold}
+.badge{background:#D32F2F;color:#fff;font-size:11px;padding:3px 8px;border-radius:10px}
+.cart{position:fixed;bottom:15px;left:15px;right:15px;background:#222;color:#fff;padding:14px 18px;border-radius:16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 5px 20px rgba(0,0,0,.3)}
+.cart button{background:#25D366;color:#fff;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer}
+footer{background:#222;color:#fff;text-align:center;padding:20px;margin-top:30px;font-size:13px}
 </style>
 </head>
 <body>
-<header><h1>🍔 برجر الملك</h1><p>ألذ برجر في مدينتك - طازج وساخن</p></header>
-<div class="hero"><h2>عرض اليوم! وابر بـ 19 ريال فقط</h2><p>لحمة مشوية على اللهب + جبن ذايب + بطاطس مجاناً</p><a href="#menu">اطلب الحين</a></div>
-<div class="menu" id="menu">
-<div class="card"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600"><h3>وابر كلاسيك</h3><p>لحم مشوي، خس، طماطم، مايونيز</p><div class="price">19 ر.س</div><button onclick="alert('تمت إضافة وابر كلاسيك للسلة')">أضف للسلة</button></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600"><h3>دبل تشيز برجر</h3><p>طبقتين لحم، دبل جبن، صوص خاص</p><div class="price">24 ر.س</div><button onclick="alert('تمت إضافة دبل تشيز للسلة')">أضف للسلة</button></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600"><h3>وجبة الملك + بطاطس</h3><p>برجر + بطاطس ذهبية + مشروب</p><div class="price">29 ر.س</div><button onclick="alert('تمت إضافة وجبة الملك للسلة')">أضف للسلة</button></div>
+
+<header>
+<h1>🍔 برجر الملك</h1>
+<p>الدمام - طريق الملك فهد | توصيل سريع خلال 30 دقيقة</p>
+</header>
+
+<div class="offer">
+<h2>🔥 عرض اليوم: وابر بـ 19 ريال فقط!</h2>
+<p>لحمة مشوية على اللهب + جبن ذايب + بطاطس مجاناً</p>
+<button onclick="addToCart('وابر كلاسيك',19)">اطلب العرض الحين</button>
 </div>
-<footer><p>📍 الدمام - طريق الملك فهد | ☎️ 920000000 | توصيل سريع خلال 30 دقيقة</p><p>© 2026 برجر الملك</p></footer>
+
+<div class="tabs">
+<button class="active" onclick="show('burgers',this)">🍔 برجرات</button>
+<button onclick="show('meals',this)">🍟 وجبات</button>
+<button onclick="show('sides',this)">🥤 مقبلات ومشروبات</button>
+<button onclick="show('desserts',this)">🍰 حلويات</button>
+</div>
+
+<div class="container">
+
+<div id="burgers">
+<h2 class="section-title">برجرات مشوية على اللهب</h2>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600"><div class="card-body"><h3>وابر كلاسيك <span class="badge">الأكثر طلباً</span></h3><p>لحم مشوي، خس، طماطم، مايونيز</p><div class="price-row"><div class="price"><span>25</span>19 ر.س</div><button class="add" onclick="addToCart('وابر كلاسيك',19)">+ أضف</button></div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600"><div class="card-body"><h3>دبل تشيز برجر</h3><p>طبقتين لحم، دبل جبن، صوص خاص</p><div class="price-row"><div class="price">24 ر.س</div><button class="add" onclick="addToCart('دبل تشيز برجر',24)">+ أضف</button></div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600"><div class="card-body"><h3>كرسبي تشيكن</h3><p>دجاج مقرمش، خس، صوص ثومية</p><div class="price-row"><div class="price">22 ر.س</div><button class="add" onclick="addToCart('كرسبي تشيكن',22)">+ أضف</button></div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=600"><div class="card-body"><h3>برجر هالبينو الحار 🌶️</h3><p>لحم، هالبينو، جبن حار، صوص سبايسي</p><div class="price-row"><div class="price">26 ر.س</div><button class="add" onclick="addToCart('برجر هالبينو',26)">+ أضف</button></div></div></div>
+</div>
+</div>
+
+<div id="meals" style="display:none">
+<h2 class="section-title">وجبات كاملة - مع بطاطس ومشروب</h2>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600"><div class="card-body"><h3>وجبة الملك + بطاطس</h3><p>برجر + بطاطس ذهبية + مشروب</p><div class="price-row"><div class="price">29 ر.س</div><button class="add" onclick="addToCart('وجبة الملك',29)">+ أضف</button></div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600"><div class="card-body"><h3>وجبة دبل تشيز</h3><p>دبل برجر + بطاطس + مشروب</p><div class="price-row"><div class="price">34 ر.س</div><button class="add" onclick="addToCart('وجبة دبل تشيز',34)">+ أضف</button></div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600"><div class="card-body"><h3>وجبة عائلية - تكفي 4</h3><p>4 برجر + 2 بطاطس كبير + 4 مشروب</p><div class="price-row"><div class="price">89 ر.س</div><button class="add" onclick="addToCart('وجبة عائلية',89)">+ أضف</button></div></div></div>
+</div>
+</div>
+
+<div id="sides" style="display:none">
+<h2 class="section-title">مقبلات ومشروبات</h2>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600"><div class="card-body"><h3>بطاطس ذهبية</h3><p>مقرمشة مع رشة ملح</p><div class="price-row"><div class="price">9 ر.س</div><button class="add" onclick="addToCart('بطاطس',9)">+ أضف</button></div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=600"><div class="card-body"><h3>ناجتس دجاج - 6 قطع</h3><p>مع صوصك المفضل</p><div class="price-row"><div class="price">12 ر.س</div><button class="add" onclick="addToCart('ناجتس',12)">+ أضف</button></div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=600"><div class="card-body"><h3>بيبسي / سفن أب</h3><p>بارد ومنعش</p><div class="price-row"><div class="price">6 ر.س</div><button class="add" onclick="addToCart('مشروب',6)">+ أضف</button></div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1553787499-6f9133860278?w=600"><div class="card-body"><h3>عصير برتقال طازج</h3><p>طبيعي 100%</p><div class="price-row"><div class="price">10 ر.س</div><button class="add" onclick="addToCart('عصير برتقال',10)">+ أضف</button></div></div></div>
+</div>
+</div>
+
+<div id="desserts" style="display:none">
+<h2 class="section-title">حلويات</h2>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600"><div class="card-body"><h3>ميلك شيك شوكولاتة</h3><p>كريمي وثقيل</p><div class="price-row"><div class="price">14 ر.س</div><button class="add" onclick="addToCart('ميلك شيك',14)">+ أضف</button></div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600"><div class="card-body"><h3>آيس كريم فانيليا</h3><p>مع صوص شوكولاتة</p><div class="price-row"><div class="price">8 ر.س</div><button class="add" onclick="addToCart('آيس كريم',8)">+ أضف</button></div></div></div>
+</div>
+</div>
+
+</div>
+
+<div class="cart">
+<div>🛒 سلتك: <b id="count">0</b> صنف | الإجمالي: <b id="total">0</b> ر.س</div>
+<button onclick="order()">اطلب واتساب ✅</button>
+</div>
+
+<footer>
+📍 الدمام - طريق الملك فهد | 📞 920000000<br>
+© 2026 برجر الملك - جميع الحقوق محفوظة
+</footer>
+
+<script>
+let cart=[], total=0;
+function addToCart(name,price){cart.push(name);total+=price;document.getElementById('count').innerText=cart.length;document.getElementById('total').innerText=total;alert('تمت إضافة '+name+' ✅')}
+function show(id,btn){['burgers','meals','sides','desserts'].forEach(x=>document.getElementById(x).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+function order(){if(cart.length==0){alert('سلتك فاضية، اختر شي أولاً');return}let msg='أهلاً، أبي أطلب:%0A'+cart.join('%0A')+'%0Aالإجمالي: '+total+' ر.س';window.open('https://wa.me/966920000000?text='+msg,'_blank')}
+</script>
 </body>
 </html>
