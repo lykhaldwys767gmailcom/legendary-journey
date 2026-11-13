@@ -1,1 +1,75 @@
+// تثبيت الحزم:
+// npm init -y
+// npm install express bcryptjs jsonwebtoken
 
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+const app = express();
+app.use(express.json());
+
+// غيّر هذا السر واحفظه في متغير بيئة (.env) وليس في الكود
+const JWT_SECRET = process.env.JWT_SECRET || "change-this-secret";
+
+// تخزين مؤقت في الذاكرة (استبدله بقاعدة بيانات حقيقية)
+// الهيكل: Map<email, { id, email, passwordHash }>
+const users = new Map();
+let nextId = 1;
+
+// ---------- تسجيل حساب جديد ----------
+app.post("/register", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password || password.length < 8) {
+    return res
+      .status(400)
+      .json({ error: "البريد وكلمة مرور لا تقل عن 8 أحرف مطلوبة" });
+  }
+  if (users.has(email)) {
+    return res.status(409).json({ error: "البريد مسجّل مسبقًا" });
+  }
+
+  const passwordHash = await bcrypt.hash(password, 12);
+  users.set(email, { id: nextId++, email, passwordHash });
+
+  res.status(201).json({ message: "تم إنشاء الحساب" });
+});
+
+// ---------- تسجيل الدخول ----------
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = users.get(email);
+
+  // رسالة موحّدة حتى لا نكشف هل البريد موجود أم لا
+  const ok = user && (await bcrypt.compare(password || "", user.passwordHash));
+  if (!ok) {
+    return res.status(401).json({ error: "بيانات الدخول غير صحيحة" });
+  }
+
+  const token = jwt.sign({ sub: user.id, email: user.email }, JWT_SECRET, {
+    expiresIn: "1h",
+  });
+  res.json({ token });
+});
+
+// ---------- middleware لحماية المسارات ----------
+function requireAuth(req, res, next) {
+  const header = req.headers.authorization || "";
+  const token = header.startsWith("Bearer ") ? header.slice(7) : null;
+  if (!token) return res.status(401).json({ error: "غير مصرّح" });
+
+  try {
+    req.user = jwt.verify(token, JWT_SECRET);
+    next();
+  } catch {
+    res.status(401).json({ error: "رمز غير صالح أو منتهي" });
+  }
+}
+
+// ---------- مسار محمي للتجربة ----------
+app.get("/me", requireAuth, (req, res) => {
+  res.json({ id: req.user.sub, email: req.user.email });
+});
+
+app.listen(3000, () => console.log("Server running on http://localhost:3000"));
